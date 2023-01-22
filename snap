@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "" ]; then
+    echo "Usage: $0 <stream name>"
+    exit 42
+fi
+
+# were here at a scheduled time to take a photo
+# this means:
+# 1 - do it quick
+# 2 - safely with a lock
+
+# fixme: flock?
+
+out=$(mktemp /dev/shm/out.XXXXXX)
+
+raspistill --awb sun --encoding png -o $out
+
+curl https://hass.vanstaveten.us/ # notify pixel
+
+stream=$1
+
+# cloudcover=$(curl $hass# fixme
+cloudcover=0
+solarrad=0
+
+# todo embed exif tags
+
+mkdir -p ~/daylapse/streams/$stream
+cp $out ~/daylapse/streams/$stream/$stamp.png
+
+# todo unlock
+# notify done
