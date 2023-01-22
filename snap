@@ -41,6 +41,7 @@ stream=$1
 # cloudcover=$(curl $hass# fixme
 cloudcover=$(hass_sensor openweathermap_home_forecast_cloud_coverage)
 solarrad=$(hass_sensor pws_solar_radiation_w_m2)
+# TODO: log sun and moon alt/azi
 
 
 stamp=$(date -u +%Y%m%d-%H%M%S)
