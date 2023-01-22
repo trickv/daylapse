@@ -10,19 +10,37 @@ fi
 # 1 - do it quick
 # 2 - safely with a lock
 
+source secrets.sh
+
+hass_sensor() {
+    sensor_read=$(mktemp /dev/shm/read.XXXXXX)
+    curl -s -X GET -H "Authorization: Bearer $hass_llac" \
+       -H "Content-Type: application/json" \
+       https://hass.vanstaveren.us/api/states/sensor.$1 \
+       > $sensor_read
+    if [ $? -ne 0 ]; then
+	return -1
+    fi
+    value=$(cat $sensor_read | jq -r .state)
+    echo "Value: $value" > /dev/stderr
+    rm -f $sensor_read
+    #return $value
+    echo $value
+}
+
 # fixme: flock?
 
 out=$(mktemp /dev/shm/out.XXXXXX)
 
-raspistill --awb sun --encoding png -o $out
+#raspistill --awb sun --encoding png -o $out
 
 curl https://hass.vanstaveten.us/ # notify pixel
 
 stream=$1
 
 # cloudcover=$(curl $hass# fixme
-cloudcover=0
-solarrad=0
+cloudcover=$(hass_sensor openweathermap_home_forecast_cloud_coverage)
+solarrad=$(hass_sensor pws_solar_radiation_w_m2)
 
 # todo embed exif tags
 
