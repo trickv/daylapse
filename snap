@@ -32,7 +32,7 @@ hass_sensor() {
 
 out=$(mktemp /dev/shm/out.XXXXXX)
 
-#raspistill --awb sun --encoding png -o $out
+raspistill --awb sun --encoding png -o $out
 
 curl https://hass.vanstaveten.us/ # notify pixel
 
@@ -42,10 +42,14 @@ stream=$1
 cloudcover=$(hass_sensor openweathermap_home_forecast_cloud_coverage)
 solarrad=$(hass_sensor pws_solar_radiation_w_m2)
 
-# todo embed exif tags
 
-mkdir -p ~/daylapse/streams/$stream
-cp $out ~/daylapse/streams/$stream/$stamp.png
+stamp=$(date -u +%Y%m%d-%H%M%S)
+dir=~/daylapse/streams/$stream
+mkdir -p $dir
+file=$dir/$stamp.png
+cp $out $file
+
+exiftool -config ~/daylapse/exiftool.conf -SolarRadiation=$solarrad -CloudCover=$cloudcover $file
 
 # todo unlock
 # notify done
