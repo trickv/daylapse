@@ -1,4 +1,9 @@
 sudo apt install \
 	exiftool \
 	jq \
+	python3-pip \
 	curl
+
+sudo pip3 install \
+	astropy \
+	astroplan
