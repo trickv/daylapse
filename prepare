@@ -6,6 +6,7 @@ sudo apt install \
 	exiftool \
 	jq \
 	vim \
+	tree \
 	tmux \
 	python3-astropy \
 	python3-astroplan \
