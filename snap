@@ -48,6 +48,8 @@ dir=~/daylapse/streams/$stream
 mkdir -p $dir
 file=$dir/$stamp.png
 cp $out $file
+rm -f $dir/latest.png
+ln -s $file $dir/latest.png
 
 exiftool -config ~/daylapse/exiftool.conf -SolarRadiation=$solarrad -CloudCover=$cloudcover $file
 
