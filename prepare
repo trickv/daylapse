@@ -5,11 +5,8 @@ sudo apt update
 sudo apt install \
 	exiftool \
 	jq \
-	python3-pip \
 	vim \
 	tmux \
+	python3-astropy \
+	python3-astroplan \
 	curl
-
-sudo pip3 install \
-	astropy \
-	astroplan
