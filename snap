@@ -54,4 +54,6 @@ ln -s $file $dir/latest.png
 exiftool -config ~/daylapse/exiftool.conf -SolarRadiation=$solarrad -CloudCover=$cloudcover $file
 
 # todo unlock
+
+rm -f $out
 # notify done
