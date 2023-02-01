@@ -27,8 +27,10 @@ print()
 from astroplan import Observer, FixedTarget
 o = Observer(home)
 
+start_time = Time('2023-01-31 12:00:00') - utcoffset
+
 print("sun set")
-time = Time('2023-01-18 12:00:00') - utcoffset
+time = start_time
 for x in range(0, 20):
     time += 1
     s = o.sun_set_time(time, which='next') # horizon=20
@@ -40,7 +42,7 @@ for x in range(0, 20):
 print("sun 20°")
 import astropy.units as u
 above = 20 * u.degree
-time = Time('2023-01-18 12:00:00') - utcoffset
+time = start_time
 for x in range(0, 20):
     time += 1
     s = o.sun_set_time(time, which='next', horizon=above, n_grid_points=1500) # horizon=20
