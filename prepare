@@ -3,6 +3,7 @@
 sudo apt update
 
 sudo apt install \
+	prometheus-node-exporter \
 	exiftool \
 	jq \
 	vim \
