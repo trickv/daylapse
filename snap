@@ -10,7 +10,7 @@ fi
 # 1 - do it quick
 # 2 - safely with a lock
 
-source secrets.sh
+source ~/daylapse/secrets.sh
 
 hass_sensor() {
     sensor_read=$(mktemp /dev/shm/read.XXXXXX)
