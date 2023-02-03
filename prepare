@@ -1,9 +1,14 @@
+#!/usr/bin/env bash
+
+sudo apt update
+
 sudo apt install \
+	prometheus-node-exporter \
 	exiftool \
 	jq \
-	python3-pip \
+	vim \
+	tree \
+	tmux \
+	python3-astropy \
+	python3-astroplan \
 	curl
-
-sudo pip3 install \
-	astropy \
-	astroplan
