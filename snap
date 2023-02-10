@@ -47,12 +47,13 @@ dir=~/daylapse/streams/$stream
 mkdir -p $dir
 file=$dir/$stamp.png
 cp $out $file
-rm -f $dir/latest.png
+rm -f $dir/latest.{png,jpeg}
 pushd $dir
 ln -s $stamp.png latest.png
+time convert -resize 1280x1024 -quality 50 latest.png latest.jpeg
 popd
 
-exiftool -config ~/daylapse/exiftool.conf -SolarRadiation=$solarrad -CloudCover=$cloudcover $file
+time exiftool -config ~/daylapse/exiftool.conf -SolarRadiation=$solarrad -CloudCover=$cloudcover $file
 
 rm -f $out
 # notify done
