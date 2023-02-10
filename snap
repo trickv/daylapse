@@ -34,8 +34,6 @@ lock=/dev/shm/camera-lock
 touch $lock
 flock --verbose -w 30 $lock raspistill --awb sun --encoding png -o $out
 
-curl https://hass.vanstaveten.us/ # notify pixel
-
 stream=$1
 
 # cloudcover=$(curl $hass# fixme
